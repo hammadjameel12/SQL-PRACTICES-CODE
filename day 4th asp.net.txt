@@ -1,0 +1,109 @@
+                          //namespace ASP.NETCOREEMPTY
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+            var app = builder.Build();
+
+            
+            
+            app.Use(async (context ,next) =>
+            {
+                await context.Response.WriteAsync("wellcome hammad \n");
+                await next(context);
+            });
+
+            app.Use(async (context ,next) =>
+            {
+                await context.Response.WriteAsync("wellcome Asp.net \n");
+                await next(context);
+            });
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("wellcome to MY company CODINGBEATS");
+            });
+            //app.MapGet("/", () => "Hello World!");
+
+            app.Run();
+        }
+    }
+}
+
+                       // Routing
+In simple words, we can say that Routing in ASP.NET MVC is a pattern  matching mechanism that handles the
+ incoming HTTP request (i.e. incoming URL) and figures out what to do with that incoming HTTP request
+TYPES:
+Convention Based Routing
+Attribute-Based Routing.
+
+amespace maprouting
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+            var app = builder.Build();
+
+            app.MapGet("/Home", () => "Hello World! -Get");
+            app.MapPut("/Home", () => "Hello World! -Get");
+            app.MapDelete("/Home", () => "Hello World! -Get");
+            app.MapPost("/Home", () => "Hello World! -Get");
+
+            app.Run();
+        }
+    }
+}
+
+
+
+namespace maprouting
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+            var app = builder.Build();
+
+            app.UseRouting();
+
+            app.UseEndpoints( Endpoints =>
+                {
+                    Endpoints.MapGet("/Home", async (context) =>
+                    {
+                        await context.Response.WriteAsync("THIS IS HOME PAGE");
+                    });
+                    Endpoints.MapPost("/Home", async (context) =>
+                    {
+                        await context.Response.WriteAsync("THIS IS HOME PAGE");
+                    });
+                    Endpoints.MapDelete("/Home", async (context) =>
+                    {
+                        await context.Response.WriteAsync("THIS IS HOME PAGE");
+                    });
+                    Endpoints.MapPut("/Home", async (context) =>
+                    {
+                        await context.Response.WriteAsync("THIS IS HOME PAGE");
+                    });
+                });
+
+            app.Run( async(HttpContext Context) =>
+            {
+                await Context.Response.WriteAsync("Page Not Found");
+            });
+            //app.MapGet("/Home", () => "Hello World! -Get");
+            //app.MapPut("/Home", () => "Hello World! -Get");
+            //app.MapDelete("/Home", () => "Hello World! -Get");
+            //app.MapPost("/Home", () => "Hello World! -Get");
+
+            app.Run();
+        }
+    }
+}
+
+
+
